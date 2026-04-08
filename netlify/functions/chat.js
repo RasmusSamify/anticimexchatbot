@@ -148,9 +148,9 @@ exports.handler = async function(event) {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.CLAUDE_API_KEY;
   if (!apiKey) {
-    console.error('ANTHROPIC_API_KEY saknas i environment variables');
+    console.error('CLAUDE_API_KEY saknas i environment variables');
     return {
       statusCode: 500,
       headers: { 'Access-Control-Allow-Origin': '*' },
