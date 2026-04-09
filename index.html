@@ -153,34 +153,36 @@ body {
 /* ─── HEADER ─── */
 .ac-hdr {
   background: var(--dark);
-  padding: 14px 16px 14px 18px;
-  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  padding: 18px 16px 16px;
+  display: flex; align-items: center; flex-shrink: 0;
+  position: relative;
 }
 .ac-hdr-back {
   background: none; border: none; color: rgba(255,255,255,.6);
   cursor: pointer; font-size: 24px; line-height: 1;
-  padding: 0 4px 0 0; display: none; align-items: center;
+  padding: 0; display: none; align-items: center;
   transition: color .15s; font-family: var(--font);
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
 }
 .ac-hdr-back:hover { color: white; }
 .ac-hdr-back.show { display: flex; }
+.ac-hdr-center {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
 .ac-hdr-logo {
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
-.ac-hdr-info { flex: 1; min-width: 0; }
-.ac-hdr-name { color: white; font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; }
-.ac-hdr-status { display: flex; align-items: center; gap: 5px; margin-top: 2px; }
-.ac-hdr-dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
-  animation: dotBlink 2s ease-in-out infinite;
+.ac-hdr-name {
+  color: white; font-size: 13px; font-weight: 600;
+  letter-spacing: .01em; opacity: .85;
 }
-@keyframes dotBlink { 0%,100%{opacity:1} 50%{opacity:.4} }
-.ac-hdr-status span { color: rgba(255,255,255,.5); font-size: 11.5px; }
 .ac-hdr-phone {
   width: 32px; height: 32px; border-radius: 8px;
   background: rgba(255,255,255,.1); border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   color: rgba(255,255,255,.7); transition: background .15s, color .15s;
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
 }
 .ac-hdr-phone:hover { background: rgba(255,255,255,.18); color: white; }
 
@@ -535,12 +537,11 @@ body {
   <div id="ac-panel">
     <div class="ac-hdr">
       <button class="ac-hdr-back" id="hdr-back" onclick="goHome()">‹</button>
-      <div class="ac-hdr-logo">
-        <img src="https://axypazcbgcogtdqqimvi.supabase.co/storage/v1/object/public/Bilder/nedladdning.png" alt="Anticimex" style="height:32px;width:auto;object-fit:contain;" />
-      </div>
-      <div class="ac-hdr-info">
-        <div class="ac-hdr-name" id="hdr-title">Anticimex Assistenten</div>
-        <div class="ac-hdr-status"><div class="ac-hdr-dot"></div><span>Online nu</span></div>
+      <div class="ac-hdr-center">
+        <div class="ac-hdr-logo">
+          <img src="https://axypazcbgcogtdqqimvi.supabase.co/storage/v1/object/public/Bilder/nedladdning.png" alt="Anticimex" style="height:36px;width:auto;object-fit:contain;" />
+        </div>
+        <div class="ac-hdr-name" id="hdr-title">Anticimex Hjälpcenter</div>
       </div>
       <button class="ac-hdr-phone" onclick="showScreen('s-contact')" title="Kontakt">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -788,7 +789,7 @@ body {
 
 <script>
 let isOpen = false, chatBusy = false, chatHistory = [];
-const TITLES = {'s-home':'Anticimex Assistenten','s-pests':'Skadedjur','s-faq':'Vanliga frågor','s-pest-detail':'','s-fukt':'Fukt & Mögel','s-besiktning':'Besiktning','s-brand':'Brandskydd','s-chat':'AI-assistenten','s-contact':'Kontakta oss'};
+const TITLES = {'s-home':'Anticimex Hjälpcenter','s-pests':'Skadedjur','s-faq':'Vanliga frågor','s-pest-detail':'','s-fukt':'Fukt & Mögel','s-besiktning':'Besiktning','s-brand':'Brandskydd','s-chat':'AI-assistenten','s-contact':'Kontakta oss'};
 
 function toggleWidget() {
   isOpen = !isOpen;
@@ -812,7 +813,7 @@ function goHome() {
   const cur = document.querySelector('.ac-screen.active');
   const home = document.getElementById('s-home');
   if (cur === home) return;
-  document.getElementById('hdr-title').textContent = 'Anticimex Assistenten';
+  document.getElementById('hdr-title').textContent = 'Anticimex Hjälpcenter';
   document.getElementById('hdr-back').classList.remove('show');
   cur.classList.remove('active'); cur.classList.add('prev');
   home.classList.add('active');
